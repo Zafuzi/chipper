@@ -1,4 +1,4 @@
-# plankton-esbuild
+# Chipper 
 
 This repo uses esbuild to automate building a simple webapp. Luckily I wrote a simple script that abstracts all of that away, like a good programmer.
 
