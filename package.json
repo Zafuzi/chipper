@@ -1,0 +1,25 @@
+{
+  "name": "chipper",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build.js --watch",
+    "start_minify": "node build.js --build --watch",
+    "build": "node build.js --build",
+    "serve": "nodemon dist/index.js --dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.20.0",
+    "esbuild": "^0.15.6",
+    "esbuild-copy-static-files": "^0.1.0",
+    "esbuild-plugin-less": "^1.1.9",
+    "express": "^4.18.1",
+    "minimize": "^2.2.0",
+    "nodemon": "^2.0.19",
+    "path": "^0.12.7"
+  }
+}
