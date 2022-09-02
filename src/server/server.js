@@ -47,17 +47,17 @@ app.use(function(req, res, next)
     next();
 });
 
-/* -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ROUTES -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - */  
-app.get("/", (request, response) =>
-{
-    response.send(parseLayout());
-});
+/* -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ROUTES -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - */
 
-app.get("/about", (request, response) =>
+
+// KEEP AT BOTTOM
+app.use((request, response, next) =>
 {
     response.send(parseLayout());
+    next();
 });
 /* -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - END ROUTES -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - */
+
 
 if(process.argv.indexOf("--dev-server") >= 0)
 {
