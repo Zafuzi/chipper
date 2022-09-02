@@ -1,3 +1,5 @@
+delete require.cache[module.filename];
+
 import layout from "../client/index.html";
 import header from "../client/components/header/header.html";
 import footer from "../client/components/footer/footer.html";
