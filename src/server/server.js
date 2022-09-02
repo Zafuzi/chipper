@@ -63,7 +63,7 @@ if(process.argv.indexOf("--dev-server") >= 0)
     {
         console.log(`--- App listening: http://localhost:${server.address().port}`);
         console.log(`--- Public Directory: ${publicDir}`);
-        fs.stat("./dist/public/client.min.js", function (error, result)
+        fs.stat("./dist/public/client.js", function (error, result)
         {
             if (error)
             {
