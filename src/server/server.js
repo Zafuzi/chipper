@@ -1,5 +1,6 @@
 import layout from "../client/index.html";
 import header from "../client/components/header/header.html";
+import footer from "../client/components/footer/footer.html";
 
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -9,18 +10,28 @@ const publicDir = path.resolve(__dirname, "public");
 const Minimize = require("minimize");
 const fs = require("fs");
 
-const parseLayout = function (template)
+const parseLayout = function (hideHeader, hideFooter)
 {
-    if(!template)
-    {
-        return layout;
-    }
-
     let parsed = layout;
 
-    parsed = parsed.replace(/__AppHeader__/, header);
-    parsed = parsed.replace(/__AppBody__/, template);
-    parsed = parsed.replace(/__AppFooter__/, "");
+    if(!hideHeader)
+    {
+        parsed = parsed.replace(/__AppHeader__/, header);
+    }
+    else
+    {
+        parsed = parsed.replace(/__AppHeader__/, "");
+    }
+
+    if(!hideFooter)
+    {
+        parsed = parsed.replace(/__AppFooter__/, footer);
+    }
+    else
+    {
+        parsed = parsed.replace(/__AppFooter__/, "");
+    }
+
     parsed = new Minimize().parse(parsed);
 
     console.log(`\tparseLayout.html: ${Buffer.byteLength(parsed)} bytes`);
@@ -28,26 +39,23 @@ const parseLayout = function (template)
 }
 
 app.use('/public', express.static(publicDir));
-
 app.use(function(req, res, next)
 {
     console.log(`\n--- ${req.method} | ${req.url}`);
     next();
 });
 
+/* -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ROUTES -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - */  
 app.get("/", (request, response) =>
 {
-    response.setHeader('Content-Type', 'text/html');
-    response.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-    response.send(parseLayout(require("../client/pages/home.html")));
+    response.send(parseLayout());
 });
 
 app.get("/about", (request, response) =>
 {
-    response.setHeader('Content-Type', 'text/html');
-    response.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-    response.send(parseLayout(require("../client/pages/about.html")));
+    response.send(parseLayout());
 });
+/* -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - END ROUTES -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - */
 
 if(process.argv.indexOf("--dev-server") >= 0)
 {

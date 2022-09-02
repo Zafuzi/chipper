@@ -14,9 +14,13 @@
   <body>
     <block id="App">
         __AppHeader__
-        __AppBody__
+        <block>
+            <main class="transparent" id="AppBody">
+                __content__
+            </main>
+        </block>
         __AppFooter__
     </block>
-    <script type="module" src="public/client.min.js"></script>
+    <script type="module" src="public/client.js"></script>
   </body>
 </html>
